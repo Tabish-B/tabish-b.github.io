@@ -1,0 +1,150 @@
+<header>
+  <style>
+    #navbar .navbar-content { display: flex; align-items: center; width: 100%; }
+    #navbar .navbar-brand { flex: 0 0 auto; margin-right: 2rem; white-space: nowrap; }
+    #navbar .navbar-brand .brand-first-name { color: var(--global-theme-color); font-weight: 700; }
+    #navbar .navbar-collapse-main { display: flex !important; align-items: center; justify-content: space-between; flex: 1 1 auto; }
+    #navbar .navbar-menu-list { align-items: center; margin-left: 0; }
+    #navbar .navbar-actions { display: flex; align-items: center; gap: 0.65rem; margin-left: auto; }
+    #navbar .navbar-actions .nav-item,
+    #navbar .navbar-actions .toggle-container { margin-left: 0; }
+    #navbar .navbar-actions .nav-link,
+    #navbar .navbar-actions button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      border: 0;
+      background: transparent;
+    }
+    #navbar .navbar-actions .nav-link i,
+    #navbar .navbar-actions button i {
+      display: inline-block;
+      width: 1.1rem;
+      font-size: 1rem;
+      line-height: 1;
+      text-align: center;
+    }
+    #navbar .navbar-actions .navbar-cv-icon {
+      width: 1.1rem;
+      height: 1.1rem;
+      display: inline-block;
+      background-color: var(--global-text-color);
+      -webkit-mask: url("{{ '/assets/img/cv.svg' | relative_url }}") center / contain no-repeat;
+      mask: url("{{ '/assets/img/cv.svg' | relative_url }}") center / contain no-repeat;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    #navbar .navbar-actions .nav-link:hover .navbar-cv-icon,
+    #navbar .navbar-actions .navbar-icon-hover:hover,
+    #navbar .navbar-actions .navbar-icon-hover:focus-visible {
+      color: var(--global-hover-color);
+      transform: scale(1.08);
+    }
+    #navbar .navbar-actions .nav-link:focus-visible .navbar-cv-icon,
+    #navbar .navbar-actions .nav-link:hover .navbar-cv-icon {
+      background-color: var(--global-hover-color);
+      transform: scale(1.08);
+    }
+    #navbar .navbar-actions .navbar-icon-hover {
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    #navbar .navbar-actions .nav-link:hover,
+    #navbar .navbar-actions button:hover {
+      color: var(--global-hover-color);
+    }
+    #navbar .navbar-actions .navbar-cv-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+    #navbar .navbar-actions button .nav-link { width: 100%; height: 100%; }
+    #navbar #search-toggle::before,
+    #navbar #search-toggle::after { content: none !important; }
+    {% if page.url == '/cv/' %}
+      .post-title > a.float-right::after {
+        content: " Open CV PDF";
+        margin-left: 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 400;
+        vertical-align: middle;
+      }
+    {% endif %}
+    #navbar .navbar-actions .toggle-container { display: flex; align-items: center; height: 2.25rem; transform: none; }
+    #navbar .navbar-actions #light-toggle { transform: none; }
+    #navbar #light-toggle-system { display: none !important; }
+    #navbar #light-toggle-dark,
+    #navbar #light-toggle-light { display: none !important; }
+    html[data-theme-setting="dark"] #navbar #light-toggle-dark { display: inline-block !important; }
+    html[data-theme-setting="light"] #navbar #light-toggle-light { display: inline-block !important; }
+    html[data-theme-setting="system"] #navbar #light-toggle-light { display: inline-block !important; }
+    @media (prefers-color-scheme: dark) {
+      html[data-theme-setting="system"] #navbar #light-toggle-light { display: none !important; }
+      html[data-theme-setting="system"] #navbar #light-toggle-dark { display: inline-block !important; }
+    }
+    @media (min-width: 576px) {
+      #navbar .nav-item.dropdown:hover > .dropdown-menu {
+        display: block;
+        margin-top: 0;
+      }
+      #navbar .nav-item.dropdown > .dropdown-menu { top: calc(100% - 1px); }
+    }
+    @media (max-width: 575.98px) {
+      #navbar .navbar-content { flex-wrap: wrap; }
+      #navbar .navbar-collapse-main { display: none !important; flex-basis: 100%; }
+      #navbar .navbar-collapse-main.show { display: block !important; }
+      #navbar .navbar-menu-list, #navbar .navbar-actions { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+      #navbar .navbar-actions { margin-left: 0; }
+      #navbar .navbar-actions { gap: 0.35rem; }
+    }
+  </style>
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
+    <div class="container navbar-content">
+      <a class="navbar-brand title font-weight-lighter" href="{{ '/' | relative_url }}"><span class="brand-first-name">Tabish</span> Butt</a>
+      <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span><span class="icon-bar middle-bar"></span><span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav">
+        <ul class="navbar-nav navbar-menu-list flex-nowrap">
+          <li class="nav-item dropdown {% if page.permalink == '/' or page.permalink == '/news/' or page.permalink == '/contact/' %}active{% endif %}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">About</a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="{{ '/' | relative_url }}">About</a>
+              <a class="dropdown-item" href="{{ '/news/' | relative_url }}">News</a>
+              <a class="dropdown-item" href="{{ '/contact/' | relative_url }}">Contact</a>
+              <a class="dropdown-item" href="{{ '/blog/' | relative_url }}">Blog</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown {% if page.permalink == '/publications/' or page.permalink == '/people/' or page.permalink == '/books/' %}active{% endif %}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">Research</a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="{{ '/publications/' | relative_url }}">Publications</a>
+              <a class="dropdown-item" href="{{ '/people/' | relative_url }}">Group</a>
+              <a class="dropdown-item" href="{{ '/books/' | relative_url }}">Books</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown {% if page.permalink == '/projects/' %}active{% endif %}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">Technical</a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="{{ '/projects/' | relative_url }}">Projects</a>
+            </div>
+          </li>
+          <li class="nav-item {% if page.permalink == '/repositories/' %}active{% endif %}">
+            <a class="nav-link" href="{{ '/repositories/' | relative_url }}">Repositories</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-actions flex-nowrap">
+          <li class="nav-item"><a class="nav-link" href="{{ '/cv/' | relative_url }}" title="CV" aria-label="CV"><span class="navbar-cv-icon" aria-hidden="true"></span></a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/Tabish-B" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github navbar-icon-hover"></i></a></li>
+          {% if site.data.socials.rss_icon %}<li class="nav-item"><a class="nav-link" href="{{ '/feed.xml' | relative_url }}" title="RSS feed" aria-label="RSS feed"><i class="fa-solid fa-rss navbar-icon-hover"></i></a></li>{% endif %}
+          {% if site.search_enabled %}<li class="nav-item"><button id="search-toggle" type="button" title="⌘K" aria-label="Open search"><i class="fa-solid fa-magnifying-glass"></i></button></li>{% endif %}
+          {% if site.enable_darkmode %}<li class="toggle-container"><button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"><i class="fa-solid fa-moon" id="light-toggle-dark"></i><i class="fa-solid fa-sun" id="light-toggle-light"></i></button></li>{% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% if site.enable_progressbar %}<progress id="progress" value="0"><div class="progress-container"><span class="progress-bar"></span></div></progress>{% endif %}
+</header>
